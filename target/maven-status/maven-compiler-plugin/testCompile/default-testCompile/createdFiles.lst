@@ -1,0 +1,6 @@
+com\demowebshop\stepDefinitions\HomeSteps.class
+com\demowebshop\stepDefinitions\LoginSteps.class
+com\demowebshop\stepDefinitions\OrderSteps.class
+com\demowebshop\runners\TestRunner.class
+com\demowebshop\stepDefinitions\RegistrationSteps.class
+com\demowebshop\stepDefinitions\Hooks.class
