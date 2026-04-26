@@ -1,0 +1,60 @@
+package com.demowebshop.stepDefinitions;
+
+import com.demowebshop.pages.*;
+import com.demowebshop.utils.TestBase;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
+
+public class OrderSteps {
+
+    HomePage homePage = new HomePage(TestBase.getDriver());
+    ComputersPage computersPage = new ComputersPage(TestBase.getDriver());
+    ShoppingCartPage cartPage = new ShoppingCartPage(TestBase.getDriver());
+    CheckoutPage checkoutPage = new CheckoutPage(TestBase.getDriver());
+
+    @When("User navigates to Computers category")
+    public void userNavigatesToComputersCategory() {
+        homePage.clickComputers();
+    }
+
+    @And("User selects Building Computers")
+    public void userSelectsBuildingComputers() {
+        computersPage.selectBuildComputer();
+    }
+
+    @And("User adds a computer to cart")
+    public void userAddsAComputerToCart() {
+        computersPage.addToCart();
+    }
+
+    @Then("User should see item added to cart")
+    public void userShouldSeeItemAddedToCart() throws InterruptedException {
+        Thread.sleep(2000);
+        computersPage.goToShoppingCart();
+    }
+
+    @And("User proceeds to checkout")
+    public void userProceedsToCheckout() {
+        cartPage.acceptTermsAndCheckout();
+    }
+
+    @And("User fills billing and shipping information")
+    public void userFillsBillingAndShippingInformation() {
+        checkoutPage.fillBillingAddress();
+        checkoutPage.continueShipping();
+        checkoutPage.continuePayment();
+    }
+
+    @And("User places the order")
+    public void userPlacesTheOrder() {
+        checkoutPage.confirmOrder();
+    }
+
+    @Then("User should see order confirmation")
+    public void userShouldSeeOrderConfirmation() {
+        String message = checkoutPage.getConfirmationMessage();
+        Assert.assertTrue(message.contains("Thank you"));
+    }
+}
