@@ -15,11 +15,17 @@ public class ComputersPage extends BasePage {
     @FindBy(linkText = "Accessories")
     private WebElement accessoriesLink;
 
-    @FindBy(linkText = "Build your own computer")
+    @FindBy(linkText = "Desktops")
     private WebElement buildComputerLink;
 
-    @FindBy(id = "add-to-cart-button-1")
+    @FindBy(xpath = "//div[@class='page-body']//div[2]//div[1]//div[2]//div[3]//div[2]//input[1]")
     private WebElement addToCartButton;
+
+    @FindBy(xpath ="//input[@id='product_attribute_16_3_6_19']")
+    private WebElement hddButton;
+
+    @FindBy(id = "add-to-cart-button-16")
+    private WebElement addToCartDetailsButton;
 
     @FindBy(css = ".ico-cart")
     private WebElement shoppingCartLink;
@@ -35,8 +41,11 @@ public class ComputersPage extends BasePage {
         buildComputerLink.click();
     }
 
-    public void addToCart() {
+    public void addToCart() throws InterruptedException {
         addToCartButton.click();
+        Thread.sleep(3000);
+        hddButton.click();
+        addToCartDetailsButton.click();
     }
 
     public void goToShoppingCart() {

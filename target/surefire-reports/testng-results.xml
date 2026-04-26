@@ -2,26 +2,26 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-26T18:31:28 SAST" name="Demo Web Shop Test Suite" finished-at="2026-04-26T18:31:47 SAST" duration-ms="18802">
+  <suite started-at="2026-04-26T20:55:45 SAST" name="Demo Web Shop Test Suite" finished-at="2026-04-26T20:56:29 SAST" duration-ms="43556">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-04-26T18:31:28 SAST" name="Cucumber Tests" finished-at="2026-04-26T18:31:47 SAST" duration-ms="18802">
+    <test started-at="2026-04-26T20:55:45 SAST" name="Cucumber Tests" finished-at="2026-04-26T20:56:29 SAST" duration-ms="43556">
       <class name="com.demowebshop.runners.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T18:31:28 SAST" name="setUpClass" finished-at="2026-04-26T18:31:29 SAST" duration-ms="1194" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T20:55:45 SAST" name="setUpClass" finished-at="2026-04-26T20:55:46 SAST" duration-ms="1299" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@141d3d43]]>
+                <![CDATA[org.testng.TestRunner@431e86b1]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T18:31:29 SAST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T18:31:46 SAST" duration-ms="17337" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T20:55:46 SAST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T20:56:28 SAST" duration-ms="41984" status="FAIL">
           <params>
             <param index="0">
               <value>
@@ -36,26 +36,26 @@
           </params>
           <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":"#add\-to\-cart\-button\-1"}
+              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":"input[value='Continue']:nth-of-type(3)"}
   (Session info: chrome=147.0.7727.117)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.17'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9539cda2c7f067e4af89de576c59a2fe, findElement {using=id, value=add-to-cart-button-1}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.117, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\GREGOR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50099}, goog:processID: 19504, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50099/devtoo..., se:cdpVersion: 147.0.7727.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9539cda2c7f067e4af89de576c59a2fe]]>
+Command: [7a454ca681a006761c2e601445274fdf, findElement {using=css selector, value=input[value='Continue']:nth-of-type(3)}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.117, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\GREGOR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49550}, goog:processID: 14500, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49550/devtoo..., se:cdpVersion: 147.0.7727.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7a454ca681a006761c2e601445274fdf]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#add\-to\-cart\-button\-1"}
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"input[value='Continue']:nth-of-type(3)"}
   (Session info: chrome=147.0.7727.117)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.17'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9539cda2c7f067e4af89de576c59a2fe, findElement {using=id, value=add-to-cart-button-1}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.117, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\GREGOR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50099}, goog:processID: 19504, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50099/devtoo..., se:cdpVersion: 147.0.7727.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9539cda2c7f067e4af89de576c59a2fe
+Command: [7a454ca681a006761c2e601445274fdf, findElement {using=css selector, value=input[value='Continue']:nth-of-type(3)}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.117, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\GREGOR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49550}, goog:processID: 14500, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49550/devtoo..., se:cdpVersion: 147.0.7727.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7a454ca681a006761c2e601445274fdf
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -75,16 +75,16 @@ at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:3
 at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
 at jdk.proxy2/jdk.proxy2.$Proxy23.click(Unknown Source)
-at com.demowebshop.pages.ComputersPage.addToCart(ComputersPage.java:39)
-at com.demowebshop.stepDefinitions.OrderSteps.userAddsAComputerToCart(OrderSteps.java:29)
-at ✽.User adds a computer to cart(file:///C:/Users/Gregory%20Zwane/IdeaProjects/DemoWebShopWebsite/src/test/resources/features/demowebshop.feature:18)
+at com.demowebshop.pages.CheckoutPage.continuePayment(CheckoutPage.java:80)
+at com.demowebshop.stepDefinitions.OrderSteps.userFillsBillingAndShippingInformation(OrderSteps.java:53)
+at ✽.User fills billing and shipping information(file:///C:/Users/Gregory%20Zwane/IdeaProjects/DemoWebShopWebsite/src/test/resources/features/demowebshop.feature:22)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T18:31:46 SAST" name="tearDownClass" finished-at="2026-04-26T18:31:47 SAST" duration-ms="170" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-04-26T20:56:28 SAST" name="tearDownClass" finished-at="2026-04-26T20:56:29 SAST" duration-ms="135" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

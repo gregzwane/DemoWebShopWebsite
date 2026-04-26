@@ -34,8 +34,11 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = "input[value='Continue']")
     private WebElement continueButton;
 
-    @FindBy(css = "input[value='Continue']:nth-of-type(2)")
+    @FindBy(xpath = "//input[@onclick='Shipping.save()']")
     private WebElement shippingContinue;
+
+    @FindBy(xpath = "//input[@id='PickUpInStore']")
+    private WebElement inStorePickup;
 
     @FindBy(css = "input[value='Continue']:nth-of-type(3)")
     private WebElement paymentContinue;
@@ -53,7 +56,7 @@ public class CheckoutPage extends BasePage {
     public void fillBillingAddress() {
         firstName.sendKeys("Test");
         lastName.sendKeys("User");
-        email.sendKeys("test@test.com");
+       // email.sendKeys("test@test.com");
 
         Select countrySelect = new Select(country);
         countrySelect.selectByVisibleText("United States");
@@ -66,11 +69,14 @@ public class CheckoutPage extends BasePage {
     }
 
     public void continueShipping() {
-        wait.until(d -> shippingContinue.isDisplayed());
+       // wait.until(d -> shippingContinue.isDisplayed());
+
+        inStorePickup.click();
         shippingContinue.click();
     }
 
-    public void continuePayment() {
+    public void continuePayment() throws InterruptedException{
+        Thread.sleep(3000);
         paymentContinue.click();
     }
 
