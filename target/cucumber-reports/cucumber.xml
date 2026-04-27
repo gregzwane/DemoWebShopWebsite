@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="50.781" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="Demo Web Shop E-commerce Testing" name="Register, Login and Place Order for Computer" time="50.384">
+<testsuite name="Cucumber" time="53.146" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="Demo Web Shop E-commerce Testing" name="Register, Login and Place Order for Computer" time="52.649">
 <system-out><![CDATA[
 Given User is on the Demo Web Shop home page................................passed
 When User navigates to registration page....................................passed
