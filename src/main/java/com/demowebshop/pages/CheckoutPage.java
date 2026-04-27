@@ -2,6 +2,8 @@ package com.demowebshop.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -40,13 +42,15 @@ public class CheckoutPage extends BasePage {
     @FindBy(xpath = "//input[@id='PickUpInStore']")
     private WebElement inStorePickup;
 
-    @FindBy(css = "input[value='Continue']:nth-of-type(3)")
+    @FindBy(xpath = "//input[@class='button-1 payment-method-next-step-button']")
     private WebElement paymentContinue;
+    @FindBy(xpath = "//input[@class='button-1 payment-info-next-step-button']")
+    private WebElement paymentInformationContinue;
 
     @FindBy(css = "input[value='Confirm']")
     private WebElement confirmButton;
 
-    @FindBy(css = ".title")
+    @FindBy(xpath = "//strong[normalize-space()='Your order has been successfully processed!']")
     private WebElement confirmationMessage;
 
     public CheckoutPage(WebDriver driver) {
@@ -76,16 +80,27 @@ public class CheckoutPage extends BasePage {
     }
 
     public void continuePayment() throws InterruptedException{
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         paymentContinue.click();
+        Thread.sleep(2000);
+        paymentInformationContinue.click();
+        Thread.sleep(2000);
     }
 
-    public void confirmOrder() {
+    public void confirmOrder() throws InterruptedException{
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromViewport(10, 10);
+        new Actions(driver)
+                .scrollFromOrigin(scrollOrigin, 0, 250)
+                .perform();
         confirmButton.click();
+        Thread.sleep(1000);
     }
 
-    public String getConfirmationMessage() {
-        wait.until(d -> confirmationMessage.isDisplayed());
+    public String getConfirmationMessage()throws InterruptedException {
+        //wait.until(d -> confirmationMessage.isDisplayed());
+        Thread.sleep(2000);
+        System.out.println(confirmationMessage.getText());
         return confirmationMessage.getText();
+
     }
 }

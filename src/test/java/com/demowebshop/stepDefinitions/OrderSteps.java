@@ -54,13 +54,13 @@ public class OrderSteps {
     }
 
     @And("User places the order")
-    public void userPlacesTheOrder() {
+    public void userPlacesTheOrder() throws InterruptedException{
         checkoutPage.confirmOrder();
     }
 
     @Then("User should see order confirmation")
-    public void userShouldSeeOrderConfirmation() {
+    public void userShouldSeeOrderConfirmation() throws InterruptedException{
         String message = checkoutPage.getConfirmationMessage();
-        Assert.assertTrue(message.contains("Thank you"));
+        Assert.assertTrue(message.contains("Your order has been successfully processed"));
     }
 }
