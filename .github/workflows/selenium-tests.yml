@@ -18,10 +18,9 @@ jobs:
 
     strategy:
       matrix:
-        # Run tests on different browsers if needed
         browser: [chrome]
-        # Uncomment for multiple browsers
-        # browser: [chrome, firefox]
+        # For multiple browsers, you can add: [chrome, firefox]
+        # Note: Firefox requires different setup
 
     steps:
       # Step 1: Checkout code
@@ -30,54 +29,52 @@ jobs:
 
       # Step 2: Set up JDK 11
       - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
 
       # Step 3: Cache Maven dependencies
       - name: Cache Maven dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Step 4: Cache WebDriver binaries
+      # Step 4: Cache WebDriver binaries (WebDriverManager handles this)
       - name: Cache WebDriver Manager
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/webdrivermanager
           key: ${{ runner.os }}-webdrivermanager
 
-      # Step 5: Set up Chrome browser
+      # Step 5: Setup Chrome (Official GitHub Action)
       - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: actions/setup-chrome@v1
         with:
           chrome-version: 'stable'
 
-      - name: Setup Chrome Driver
-        uses: browser-actions/setup-chromedriver@v1
-        with:
-          chrome-version: 'stable'
-
-      # Step 6: Display Chrome version for debugging
-      - name: Display Chrome version
+      # Step 6: Display versions for debugging
+      - name: Display environment versions
         run: |
+          echo "Java version:"
+          java -version
+          echo "Maven version:"
+          mvn --version
+          echo "Chrome version:"
           google-chrome --version
-          chromedriver --version
 
       # Step 7: Run tests with Maven
       - name: Run Selenium Tests
         run: |
-          mvn clean install test
+          mvn clean test
         env:
           BROWSER: ${{ matrix.browser }}
           CI: true
-          # For headless mode (optional)
           HEADLESS: true
 
-      # Step 8: Upload Extent Report as artifact
+      # Step 8: Upload Extent Report
       - name: Upload Extent Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -92,7 +89,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-reports-${{ matrix.browser }}-${{ github.run_number }}
-          path: target/cucumber-reports/
+          path: |
+            target/cucumber-reports/
+            target/cucumber-html-reports/
           retention-days: 30
 
       # Step 10: Upload Screenshots on failure
@@ -103,15 +102,3 @@ jobs:
           name: failure-screenshots-${{ github.run_number }}
           path: test-output/Screenshots/
           retention-days: 14
-
-      # Step 11: Upload TestNG reports
-      - name: Upload TestNG Reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: testng-reports-${{ github.run_number }}
-          path: test-output/
-          retention-days: 14
-          exclude: |
-            test-output/ExtentReports/
-            test-output/Screenshots/
