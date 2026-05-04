@@ -1,0 +1,41 @@
+name: Publish Test Report
+
+on:
+  workflow_run:
+    workflows: ["Demo Web Shop Automation CI"]
+    types:
+      - completed
+
+jobs:
+  publish-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./artifacts
+          destination_dir: reports/${{ github.run_number }}
+          keep_files: true
+
+      - name: Comment PR with Report Link
+        uses: actions/github-script@v6
+        if: github.event.workflow_run.event == 'pull_request'
+        with:
+          script: |
+            const fs = require('fs');
+            const reportUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/reports/${context.runId}/extent-report.html`;
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ **Test Execution Completed!**\n\n📊 **Report URL:** ${reportUrl}\n\n🔍 **Status:** ${process.env.STATUS}`
+            });

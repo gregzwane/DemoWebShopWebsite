@@ -1,7 +1,7 @@
 package com.demowebshop.stepDefinitions;
 
 import com.demowebshop.pages.*;
-import com.demowebshop.utils.TestBase;
+import com.demowebshop.utils.TestBaseLocal;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,10 +9,10 @@ import org.testng.Assert;
 
 public class OrderSteps {
 
-    HomePage homePage = new HomePage(TestBase.getDriver());
-    ComputersPage computersPage = new ComputersPage(TestBase.getDriver());
-    ShoppingCartPage cartPage = new ShoppingCartPage(TestBase.getDriver());
-    CheckoutPage checkoutPage = new CheckoutPage(TestBase.getDriver());
+    HomePage homePage = new HomePage(TestBaseLocal.getDriver());
+    ComputersPage computersPage = new ComputersPage(TestBaseLocal.getDriver());
+    ShoppingCartPage cartPage = new ShoppingCartPage(TestBaseLocal.getDriver());
+    CheckoutPage checkoutPage = new CheckoutPage(TestBaseLocal.getDriver());
 
     @When("User navigates to Computers category")
     public void userNavigatesToComputersCategory() {

@@ -1,0 +1,117 @@
+name: Demo Web Shop Automation CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    # Run daily at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  # Allows manual trigger from GitHub UI
+
+jobs:
+  test:
+    name: Run Selenium Cucumber Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Run tests on different browsers if needed
+        browser: [chrome]
+        # Uncomment for multiple browsers
+        # browser: [chrome, firefox]
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up JDK 11
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      # Step 4: Cache WebDriver binaries
+      - name: Cache WebDriver Manager
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/webdrivermanager
+          key: ${{ runner.os }}-webdrivermanager
+
+      # Step 5: Set up Chrome browser
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 'stable'
+
+      - name: Setup Chrome Driver
+        uses: browser-actions/setup-chromedriver@v1
+        with:
+          chrome-version: 'stable'
+
+      # Step 6: Display Chrome version for debugging
+      - name: Display Chrome version
+        run: |
+          google-chrome --version
+          chromedriver --version
+
+      # Step 7: Run tests with Maven
+      - name: Run Selenium Tests
+        run: |
+          mvn clean install test
+        env:
+          BROWSER: ${{ matrix.browser }}
+          CI: true
+          # For headless mode (optional)
+          HEADLESS: true
+
+      # Step 8: Upload Extent Report as artifact
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report-${{ matrix.browser }}-${{ github.run_number }}
+          path: test-output/ExtentReports/*.html
+          retention-days: 30
+
+      # Step 9: Upload Cucumber Report
+      - name: Upload Cucumber Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports-${{ matrix.browser }}-${{ github.run_number }}
+          path: target/cucumber-reports/
+          retention-days: 30
+
+      # Step 10: Upload Screenshots on failure
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-screenshots-${{ github.run_number }}
+          path: test-output/Screenshots/
+          retention-days: 14
+
+      # Step 11: Upload TestNG reports
+      - name: Upload TestNG Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-reports-${{ github.run_number }}
+          path: test-output/
+          retention-days: 14
+          exclude: |
+            test-output/ExtentReports/
+            test-output/Screenshots/
