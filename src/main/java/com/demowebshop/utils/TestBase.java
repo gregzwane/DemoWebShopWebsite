@@ -34,6 +34,9 @@ public class TestBase {
 
                 if (isHeadless) {
                     chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--disable-gpu");
                     chromeOptions.addArguments("--window-size=1920,1080");
                 }
 
@@ -48,6 +51,9 @@ public class TestBase {
 
                 if (isHeadless) {
                     firefoxOptions.addArguments("--headless");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    firefoxOptions.addArguments("--disable-dev-shm-usage");
+                    firefoxOptions.addArguments("--disable-gpu");
                 }
 
                 driver = new FirefoxDriver(firefoxOptions);

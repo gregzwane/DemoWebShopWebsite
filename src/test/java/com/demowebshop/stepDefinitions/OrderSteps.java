@@ -26,20 +26,20 @@ public class OrderSteps {
 
     @And("User adds a computer to cart")
     public void userAddsAComputerToCart()throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         computersPage.addToCart();
     }
 
     @Then("User should see item added to cart")
     public void userShouldSeeItemAddedToCart() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         computersPage.goToShoppingCart();
     }
 
     @And("User proceeds to checkout")
     public void userProceedsToCheckout() throws InterruptedException{
         cartPage.shoppingCartList();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         cartPage.estimateCountry();
         cartPage.acceptTermsAndCheckout();
     }
@@ -47,9 +47,9 @@ public class OrderSteps {
     @And("User fills billing and shipping information")
     public void userFillsBillingAndShippingInformation()throws InterruptedException {
         checkoutPage.fillBillingAddress();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         checkoutPage.continueShipping();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         checkoutPage.continuePayment();
     }
 
