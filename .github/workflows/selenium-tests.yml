@@ -12,7 +12,7 @@ on:
 jobs:
   test:
     name: Run Selenium Cucumber Tests
-    runs-on: linux-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
