@@ -14,7 +14,7 @@ public class TestBase {
     private static String registeredPassword;
 
     public static void initializeDriver() {
-        String browser = System.getenv("BROWSER") != null ? System.getenv("BROWSER") : "chrome";
+        String browser = System.getenv("BROWSER") != null ? System.getenv("BROWSER") : "firefox";
         boolean isHeadless = Boolean.parseBoolean(System.getenv("HEADLESS"));
         boolean isCI = Boolean.parseBoolean(System.getenv("CI"));
 
