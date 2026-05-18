@@ -6,34 +6,28 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    # Run daily at 6 AM UTC
     - cron: '0 6 * * *'
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   test:
     name: Run Selenium Cucumber Tests
-    runs-on: windows-latest  # Windows runner
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         browser: [chrome]
-        # For multiple browsers, you can add: [chrome, firefox]
-        # Note: Firefox requires different setup
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up JDK 11
       - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
 
-      # Step 3: Cache Maven dependencies
       - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
@@ -41,41 +35,39 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Step 4: Cache WebDriver Manager binaries
       - name: Cache WebDriver Manager
         uses: actions/cache@v4
         with:
           path: ~/.cache/webdrivermanager
           key: ${{ runner.os }}-webdrivermanager
 
-      # Step 5: Chrome is already installed on ubuntu-latest.
-      # If you need a specific version, uncomment the next block:
-      # - name: Setup Chrome (browser-actions)
-      #   uses: browser-actions/setup-chrome@v1
-      #   with:
-      #     chrome-version: 'stable'
+      # Install Chrome explicitly (this action works)
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 'stable'
 
-      # Step 6: Display versions for debugging
-      - name: Display environment versions
+      # Verify Chrome can launch headlessly
+      - name: Test Chrome headless mode
         run: |
-          echo "Java version:"
-          java -version
-          echo "Maven version:"
-          mvn --version
-          echo "chrome version:"
-          google-chrome --version || echo "chrome not found; installing..."
-          # Optional: install chrome if missing (rare on ubuntu-latest)
-          # sudo apt-get update && sudo apt-get install -y chrome-browser chrome-chromedriver
+          google-chrome --headless --disable-gpu --no-sandbox --dump-dom https://www.example.com/ || echo "Chrome failed to start"
 
-      # Step 7: Run tests with Maven
+      - name: Display versions
+        run: |
+          java -version
+          mvn --version
+          google-chrome --version
+
+      # Run tests with Chrome headless arguments
       - name: Run Selenium Tests
-        run: mvn clean test  # 'install' is not needed for running tests
+        run: mvn clean test
         env:
           BROWSER: ${{ matrix.browser }}
           CI: true
           HEADLESS: true
+          # Additional Chrome arguments for headless mode on CI
+          CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
 
-      # Step 8: Upload Extent Report
       - name: Upload Extent Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -84,7 +76,6 @@ jobs:
           path: test-output/ExtentReports/*.html
           retention-days: 30
 
-      # Step 9: Upload Cucumber Report
       - name: Upload Cucumber Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -95,7 +86,6 @@ jobs:
             target/cucumber-html-reports/
           retention-days: 30
 
-      # Step 10: Upload Screenshots on failure
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v4
