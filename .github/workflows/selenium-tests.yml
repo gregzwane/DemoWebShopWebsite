@@ -62,10 +62,10 @@ jobs:
           java -version
           echo "Maven version:"
           mvn --version
-          echo "Chrome version:"
-          google-chrome --version || echo "Chrome not found; installing..."
-          # Optional: install Chrome if missing (rare on ubuntu-latest)
-          # sudo apt-get update && sudo apt-get install -y google-chrome-stable
+          echo "chromium version:"
+          google-chromium --version || echo "chromium not found; installing..."
+          # Optional: install chromium if missing (rare on ubuntu-latest)
+          # sudo apt-get update && sudo apt-get install -y chromium-browser chromium-chromedriver
 
       # Step 7: Run tests with Maven
       - name: Run Selenium Tests
