@@ -13,7 +13,7 @@ on:
 jobs:
   test:
     name: Run Selenium Cucumber Tests
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Windows runner
 
     strategy:
       matrix:
