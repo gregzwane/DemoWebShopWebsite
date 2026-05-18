@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="36.902" tests="1" skipped="0" failures="1" errors="0">
-<testcase classname="Demo Web Shop E-commerce Testing" name="Register, Login and Place Order for Computer" time="36.434">
-<failure type="java.lang.AssertionError" message="expected [testuser9683@test.com] but found [My account]">
-<![CDATA[java.lang.AssertionError: expected [testuser9683@test.com] but found [My account]
+<testsuite name="Cucumber" time="41.859" tests="1" skipped="0" failures="1" errors="0">
+<testcase classname="Demo Web Shop E-commerce Testing" name="Register, Login and Place Order for Computer" time="41.253">
+<failure type="java.lang.AssertionError" message="expected [testuser2463@test.com] but found [My account]">
+<![CDATA[java.lang.AssertionError: expected [testuser2463@test.com] but found [My account]
 	at org.testng.Assert.fail(Assert.java:111)
 	at org.testng.Assert.failNotEquals(Assert.java:1578)
 	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
 	at org.testng.Assert.assertEquals(Assert.java:132)
 	at org.testng.Assert.assertEquals(Assert.java:656)
 	at org.testng.Assert.assertEquals(Assert.java:666)
-	at com.demowebshop.stepDefinitions.LoginSteps.userShouldBeLoggedInSuccessfully(LoginSteps.java:30)
+	at com.demowebshop.stepDefinitions.LoginSteps.userShouldBeLoggedInSuccessfully(LoginSteps.java:29)
 	at ?.User should be logged in successfully(file:///C:/Users/Gregory%20Zwane/IdeaProjects/DemoWebShopWebsite/src/test/resources/features/demowebshop.feature:14)
 ]]>
 </failure>

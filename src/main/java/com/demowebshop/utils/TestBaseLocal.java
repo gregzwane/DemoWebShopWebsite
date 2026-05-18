@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class TestBaseLocal {
 
     private static WebDriver driver;
-    private static String registeredEmail;
+    private static String  registeredEmail;
     private static String registeredPassword;
 
     public static void initializeDriver() {
