@@ -5,4 +5,5 @@ com\demowebshop\pages\HomePage.class
 com\demowebshop\utils\TestBase.class
 com\demowebshop\pages\ComputersPage.class
 com\demowebshop\pages\LoginPage.class
+com\demowebshop\utils\TestBaseLocal.class
 com\demowebshop\pages\ShoppingCartPage.class

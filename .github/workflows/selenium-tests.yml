@@ -8,8 +8,7 @@ on:
   schedule:
     # Run daily at 6 AM UTC
     - cron: '0 6 * * *'
-  workflow_dispatch:
-  # Allows manual trigger from GitHub UI
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
 
 jobs:
   test:
@@ -42,18 +41,19 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Step 4: Cache WebDriver binaries (WebDriverManager handles this)
+      # Step 4: Cache WebDriver Manager binaries
       - name: Cache WebDriver Manager
         uses: actions/cache@v4
         with:
           path: ~/.cache/webdrivermanager
           key: ${{ runner.os }}-webdrivermanager
 
-      # Step 5: Setup Chrome (Official GitHub Action)
-      - name: Setup Chrome
-        uses: actions/setup-chrome@v1
-        with:
-          chrome-version: 'stable'
+      # Step 5: Chrome is already installed on ubuntu-latest.
+      # If you need a specific version, uncomment the next block:
+      # - name: Setup Chrome (browser-actions)
+      #   uses: browser-actions/setup-chrome@v1
+      #   with:
+      #     chrome-version: 'stable'
 
       # Step 6: Display versions for debugging
       - name: Display environment versions
@@ -63,12 +63,13 @@ jobs:
           echo "Maven version:"
           mvn --version
           echo "Chrome version:"
-          google-chrome --version
+          google-chrome --version || echo "Chrome not found; installing..."
+          # Optional: install Chrome if missing (rare on ubuntu-latest)
+          # sudo apt-get update && sudo apt-get install -y google-chrome-stable
 
       # Step 7: Run tests with Maven
       - name: Run Selenium Tests
-        run: |
-          mvn clean test install
+        run: mvn clean test  # 'install' is not needed for running tests
         env:
           BROWSER: ${{ matrix.browser }}
           CI: true
