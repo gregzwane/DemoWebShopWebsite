@@ -64,7 +64,7 @@ jobs:
         env:
           BROWSER: ${{ matrix.browser }}
           CI: true
-          HEADLESS: false
+          HEADLESS: true
           # Additional Chrome arguments for headless mode on CI
           CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
 
@@ -92,4 +92,4 @@ jobs:
         with:
           name: failure-screenshots-${{ github.run_number }}
           path: test-output/Screenshots/
-          retention-days: 14
+          retention-days: 15

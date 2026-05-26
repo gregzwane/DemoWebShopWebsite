@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-26T10:38:50 SAST" name="Demo Web Shop Test Suite" finished-at="2026-05-26T10:40:05 SAST" duration-ms="75886">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-05-26T10:38:50 SAST" name="Cucumber Tests" finished-at="2026-05-26T10:40:05 SAST" duration-ms="75886">
+      <class name="com.demowebshop.runners.TestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-05-26T10:38:50 SAST" name="setUpClass" finished-at="2026-05-26T10:38:52 SAST" duration-ms="2243" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@77b3752b]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-05-26T10:38:52 SAST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-26T10:40:05 SAST" duration-ms="73207" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Register, Login and Place Order for Computer"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Demo Web Shop E-commerce Testing"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.demowebshop.runners.TestRunner@5c33f1a9]" started-at="2026-05-26T10:40:05 SAST" name="tearDownClass" finished-at="2026-05-26T10:40:05 SAST" duration-ms="175" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- com.demowebshop.runners.TestRunner -->
+    </test> <!-- Cucumber Tests -->
+  </suite> <!-- Demo Web Shop Test Suite -->
+</testng-results>
