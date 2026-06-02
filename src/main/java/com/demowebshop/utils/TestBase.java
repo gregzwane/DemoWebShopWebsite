@@ -14,7 +14,7 @@ public class TestBase {
     private static String registeredPassword;
 
     public static void initializeDriver() {
-        String browser = System.getenv("BROWSER") != null ? System.getenv("BROWSER") : "chrome";
+        String browser = System.getenv("BROWSER") != null ? System.getenv("BROWSER") : "firefox";
         boolean isHeadless = Boolean.parseBoolean(System.getenv("HEADLESS"));
         boolean isCI = Boolean.parseBoolean(System.getenv("CI"));
 
@@ -25,8 +25,10 @@ public class TestBase {
 
         switch (browser.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().browserVersion("140.0.7339.0").setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
+               //String chromeOptions = System.getenv("CHROME_OPTIONS");
+                chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--start-maximized");
                 chromeOptions.addArguments("--disable-notifications");
                 chromeOptions.addArguments("--no-sandbox");
@@ -34,6 +36,9 @@ public class TestBase {
 
                 if (isHeadless) {
                     chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--disable-gpu");
                     chromeOptions.addArguments("--window-size=1920,1080");
                 }
 
@@ -48,6 +53,9 @@ public class TestBase {
 
                 if (isHeadless) {
                     firefoxOptions.addArguments("--headless");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    firefoxOptions.addArguments("--disable-dev-shm-usage");
+                    firefoxOptions.addArguments("--disable-gpu");
                 }
 
                 driver = new FirefoxDriver(firefoxOptions);
