@@ -13,7 +13,6 @@ jobs:
   test:
     name: Run Selenium Cucumber Tests
     runs-on: ubuntu-latest
-    container: node:20
 
     strategy:
       matrix:
@@ -27,9 +26,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '11'
-          node-version: '20'
           distribution: 'temurin'
-
 
       - name: Cache Maven dependencies
         uses: actions/cache@v4
@@ -44,20 +41,17 @@ jobs:
           path: ~/.cache/webdrivermanager
           key: ${{ runner.os }}-webdrivermanager
 
-      # Install Chrome explicitly (this action works)
-      - name: Install Chrome (latest)
+      # Install Chrome 140 (build 140) from Chrome for Testing
+      - name: Install Chrome 140
         run: |
-          #wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |
-          #sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update -qq && apt-get install -y -qq chromium-browser firefox-esr unzip
-
-
-
-      # Verify Chrome can launch headlessly
-      - name: Test Chrome headless mode
-        run: |
-          google-chrome --headless --disable-gpu --no-sandbox --dump-dom https://www.example.com/ || echo "Chrome failed to start"
+          CHROME_VERSION="140.0.7339.0"
+          CHROME_URL="https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip"
+          wget -q "$CHROME_URL" -O chrome.zip
+          unzip -q chrome.zip
+          sudo mkdir -p /opt/chrome
+          sudo mv chrome-linux64 /opt/chrome
+          sudo ln -sf /opt/chrome/chrome-linux64/chrome /usr/local/bin/google-chrome
+          google-chrome --version
 
       - name: Display versions
         run: |
@@ -72,7 +66,6 @@ jobs:
           BROWSER: ${{ matrix.browser }}
           CI: true
           HEADLESS: true
-          # Additional Chrome arguments for headless mode on CI
           CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
 
       - name: Upload Extent Report
