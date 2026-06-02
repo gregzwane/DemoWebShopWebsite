@@ -25,8 +25,10 @@ public class TestBase {
 
         switch (browser.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().browserVersion("140.0.7339.0").setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
+               //String chromeOptions = System.getenv("CHROME_OPTIONS");
+                chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--start-maximized");
                 chromeOptions.addArguments("--disable-notifications");
                 chromeOptions.addArguments("--no-sandbox");
